@@ -1,8 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection,
-    addDoc,
-    deleteDoc,getDocs, query } from 'firebase/firestore';
+import { getFirestore, 
+     } from 'firebase/firestore';
 
 const  app  =  initializeApp({
  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
@@ -18,16 +17,3 @@ export const firebaseAuth = getAuth(app);
 export default app;
 export const db = getFirestore(app);
 
-export const getData = async (id) => {
-    const productsRef = collection(db, "products");
-    const result = await getDocs(query(productsRef));
-    // console.log(getArrayFromCollection(result));
-    // console.log(result.id);
-    return await getArrayFromCollection(result);
-  };
-  
-  const getArrayFromCollection = (collection) => {
-    return collection.docs.map((doc) => {
-      return { ...doc.data(), id: doc.id };
-    });
-  };
